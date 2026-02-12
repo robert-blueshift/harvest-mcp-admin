@@ -1,0 +1,14 @@
+{
+  "name": "harvest-mcp-admin",
+  "version": "1.0.0",
+  "description": "MCP server for Harvest admin operations (projects, tasks, users, team management)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0",
+    "node-fetch": "^3.3.2"
+  }
+}
