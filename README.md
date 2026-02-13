@@ -2,7 +2,7 @@
 
 MCP server for Harvest admin operations. **Admins only** — manages projects, tasks, users, clients, and team-wide time tracking.
 
-## Tools (30)
+## Tools (31)
 
 **Users:** list, get, create, update, deactivate
 **Projects:** list, get, create, update, archive, delete
@@ -13,6 +13,7 @@ MCP server for Harvest admin operations. **Admins only** — manages projects, t
 **Reports:** account-wide by project/task/team/client
 **Team Overview:** weekly summary for ALL users — spot incomplete timesheets
 **Company:** settings, roles
+**Resolver:** resolve project/task names to IDs (active-only default)
 
 ## Setup
 
@@ -44,7 +45,8 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
       "args": ["/path/to/harvest-mcp-admin/index.js"],
       "env": {
         "HARVEST_ACCESS_TOKEN": "your-admin-token",
-        "HARVEST_ACCOUNT_ID": "your-account-id"
+        "HARVEST_ACCOUNT_ID": "your-account-id",
+        "HARVEST_RESOLVE_CACHE_TTL_SECONDS": "300"
       }
     }
   }
@@ -63,4 +65,22 @@ Edit `~/Library/Application Support/Claude/claude_desktop_config.json`:
 "Add Jessica to the EPC Network project"
 "Show me all time logged to ClearScore this month"
 "What are the team's hours by client for Q1?"
+"Resolve project 'EPC Network' and task 'Design' (active only)"
 ```
+
+Resolver tool example (returns a small list of matches with IDs):
+
+```json
+{
+  "tool": "harvest_admin_resolve_project_task",
+  "arguments": {
+    "project_name": "EPC Network",
+    "task_name": "Design",
+    "is_active": true,
+    "limit": 5,
+    "match": "contains"
+  }
+}
+```
+
+List tools default to `summary: true` to keep responses small. Set `summary: false` if you need full payloads.
