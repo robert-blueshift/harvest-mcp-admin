@@ -5,10 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "mcp:list": "node scripts/mcp-cli.js list",
+    "mcp:call": "node scripts/mcp-cli.js call",
+    "mcp:repl": "node scripts/mcp-repl.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
     "node-fetch": "^3.3.2"
+  },
+  "bin": {
+    "harvest-admin": "scripts/harvest.js",
+    "harvest": "scripts/harvest-dispatch.js"
   }
 }
